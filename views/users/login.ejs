@@ -1,0 +1,22 @@
+<% layout('./layouts/base') %>
+<div class="col-6 offset-3 mt-3">
+    <h1>Login to JUNAID KHAN</h1>
+    <form action="/login" method="post" class="needs-validation" novalidate>
+
+        <div class="mb-3">
+            <label for="username" class="form-label">User Name</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Username" required>
+            <div class="valid-feedback">Good!</div>
+            <div class="invalid-feedback">username required!</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="password" required>
+            <div class="valid-feedback">Good!</div>
+            <div class="invalid-feedback">Password shuld be valid!</div>
+        </div>
+        <button class="btn btn-primary">Login</button>
+    </form>
+
+
+</div>

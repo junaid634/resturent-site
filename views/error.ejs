@@ -1,0 +1,36 @@
+<% layout('/layouts/base') %>
+<div class="alert alert-danger mt-3" role="alert">
+   <h1><%= err.message %></h1>
+  </div>
+ 
+   <button id="button">Click Hare to Resolve</button>
+
+ 
+  <script>
+    let btnn = document.getElementById("button");
+   //  btn.innerText = "get location";
+   //  let body = document.querySelector("body");
+   //  body.append(btn);
+   let latitude;
+   let longitude;
+    btnn.addEventListener("click", async () => {
+        // let [geo] = await navigator.geolocation;
+        console.log(navigator);
+        await navigator.geolocation.getCurrentPosition((position)=>{
+           latitude = position.coords.latitude;
+           longitude = position.coords.longitude;
+           
+           
+           setTimeout(()=>{ 
+              console.log(latitude);
+              console.log(longitude);
+            },5000);
+         }, ()=>{
+            console.log("there is an error");
+         });//first write latitude and then longitude on google mapps
+         
+      });
+         
+      </script>
+
+<!--  -->

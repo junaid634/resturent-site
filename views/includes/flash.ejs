@@ -1,0 +1,18 @@
+<% if(massage.length && massage){ %>
+<div class="row">
+    <div class="alert alert-success col-8 offset-2"  role="alert">
+        <%= massage %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+</div>
+<% } %>
+
+
+<% if(error.length && error){ %>
+    <div class="row">
+        <div class="alert alert-danger col-8 offset-2"  role="alert">
+            <%= error %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+    <% } %>
