@@ -3,6 +3,7 @@ const router = express.Router();
 const newerr = require("../error_class.js");
 const { serverschema } = require("../models/joischema.js");
 const User = require("../models/schema.js");
+const {islogin} = require("../middleware.js");
 function asyncWrap(fn) {
     return function (req, res, next) {
         fn(req, res, next).catch((err) => next(err));
@@ -13,8 +14,9 @@ function asyncWrap(fn) {
 router.get("/", async (req, res) => {
     const list = await User.find({});
     res.render("index.ejs", { list });
+    // res.send("this is listings");
 });
-router.get("/new", (req, res) => {
+router.get("/new",islogin, (req, res) => {
     res.render("newlist.ejs");
 });
 router.post("/", asyncWrap(async (req, res) => {
@@ -43,7 +45,7 @@ router.post("/", asyncWrap(async (req, res) => {
     // next(new newerr(401,"fill all required fields"));
 
 }));
-router.get("/edit/:id", asyncWrap(async (req, res) => {
+router.get("/edit/:id",islogin, asyncWrap(async (req, res) => {
     let { id } = req.params;
     let editlist = await User.findById(id);
     res.render("editlist.ejs", { editlist });
@@ -78,7 +80,7 @@ router.get("/:id", asyncWrap(async (req, res) => {
 
     res.render("showlist.ejs", { list });
 }));
-router.delete("/:id", asyncWrap(async (req, res) => {
+router.delete("/:id",islogin, asyncWrap(async (req, res) => {
     let { id } = req.params;
     const list = await User.findByIdAndDelete(id);
 

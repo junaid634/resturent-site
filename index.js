@@ -74,9 +74,10 @@ app.get("/", (req, res) => {
 });
 
 app.use((req,res,next)=>{ // error pop up msg or alerts
-
+    
     res.locals.massage = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
     next();
 });
 
@@ -85,6 +86,10 @@ app.use((req,res,next)=>{ // error pop up msg or alerts
 app.use("/listings", listingsroute);
 app.use("/", userroute);
 app.use("/listings/:id/reviews", reviewsroute);
+
+
+
+
 app.get("/terms", (req, res) => {
     res.render("terms.ejs");
 });

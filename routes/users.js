@@ -12,13 +12,19 @@ router.get("/signup", (req, res) => {
 
     res.render("users/signup.ejs");
 });
-router.post("/signup",asyncWrap( async (req, res) => {
+router.post("/signup",asyncWrap( async (req, res , next) => {
     const { username, password, email } = req.body;
     const newuser = new User1({ email, username });
     const saved = await User1.register(newuser, password);
+    req.login(saved, (err)=>{
+        if(err){
+            req.flash("error", "something went wrong!!");
+            next(err);
+        }
+        req.flash("success", "wellcome to JUNAID KHAN");
+        res.redirect("/listings");
+    })
     console.log(saved);
-    req.flash("success", "wellcome to JUNAID KHAN");
-    res.redirect("/listings");
 }));
 router.get("/login", (req, res) => {
 
@@ -35,5 +41,16 @@ router.post("/login",
         req.flash("success", "Wellcome back to JUNAID KHAN");
         res.redirect("/listings");
 
+    });
+    router.get("/logout", (req,res,next)=>{
+        req.logout((err)=>{
+            if(err){
+                req.flash("error", "something went wrong!!");
+                next(err);
+            }
+            
+        });
+        req.flash("success" , "logout successfully");
+        res.redirect("/listings");
     });
 module.exports = router;

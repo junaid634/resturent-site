@@ -6,6 +6,7 @@ const newerr = require("../error_class.js");
 const User = require("../models/schema.js");
 const Review = require("../models/reviewschema.js");
 const { reviewschema } = require("../models/joischema.js");
+const { islogin } = require("../middleware.js");
 
 
 
@@ -16,7 +17,7 @@ function asyncWrap(fn) {
 };
 
 
-router.post("/", asyncWrap(async (req, res) => {
+router.post("/",islogin, asyncWrap(async (req, res) => {
     let { id } = req.params;
     let list = await User.findById(id);
     let data = req.body;
@@ -43,7 +44,7 @@ router.post("/", asyncWrap(async (req, res) => {
 //---------------reviews delete method----------------
 
 
-router.delete("/:reviewId", asyncWrap(async (req, res) => {
+router.delete("/:reviewId",islogin, asyncWrap(async (req, res) => {
     let { id, reviewId } = req.params;
     await User.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     if(!reviewId){ // pop up alerts
