@@ -323,9 +323,13 @@ const sampleListings = [
     },
   ];
 
+const initdata = async()=>{
+  User.deleteMany({});
+  const newdata = sampleListings.map((obj)=>({...obj, owner: "65ed8caf2f21a80fee97ad8b"}))
+  User.insertMany(newdata);
+}
+initdata();
 
-
-User.insertMany(sampleListings);
 
 // const user2 = new User({
 //     title: "saqib khan",
