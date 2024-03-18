@@ -33,7 +33,7 @@ app.engine("ejs", ejsmate);
 //                -----------             data base connection settings
 async function main() {
     await mongoose.connect("mongodb://127.0.0.1:27017/junaid");
-    
+
 }
 
 main().then(() => {
@@ -47,14 +47,14 @@ main().then(() => {
 app.use(cookieparser());
 app.use(session({
     secret: "saqibkhan",
-resave:false,
-saveUninitialized:true,
-cookie:{
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,// for 7 days it take in mili seconds
-    maxAge: 7*24*60*60 * 1000,
-    httpOnly: true
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,// for 7 days it take in mili seconds
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true
 
-},
+    },
 }));
 app.use(flash());
 
@@ -73,8 +73,8 @@ app.get("/", (req, res) => {
     res.send("home page");
 });
 
-app.use((req,res,next)=>{ // error pop up msg or alerts
-    
+app.use((req, res, next) => { // error pop up msg or alerts
+
     res.locals.massage = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
@@ -96,8 +96,8 @@ app.get("/terms", (req, res) => {
 
 
 
-app.get("/location/:navigator",async(req, res)=>{
-  let { navigator }  = req.params;
+app.get("/location/:navigator", async (req, res) => {
+    let { navigator } = req.params;
     console.log(navigator);
     res.send("you are good");
 
@@ -107,8 +107,8 @@ app.get("/location/:navigator",async(req, res)=>{
 //              --------------                     error page rendering
 app.all("*", (req, res, next) => {
     let err = new newerr(404, "page not found")
-    next(err);
     res.status(err.status).render("error.ejs", { err });
+    next(err);
 });
 
 
@@ -116,7 +116,7 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
     console.log("-------Error-------");
     let { status = 500, message = "some error occured" } = err;
-    if(status||message){
+    if (status || message) {
         req.flash("error", `${status} error ->> ${message}`);
         res.status(status).redirect("/listings");
         next();

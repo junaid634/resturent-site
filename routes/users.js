@@ -3,12 +3,12 @@ const router = express.Router();
 const newerr = require("../error_class.js");
 const User1 = require("../models/usermodel.js");
 const passport = require("passport");
-const { newUrl } = require("../middleware.js");
-function asyncWrap(fn) {
-    return function (req, res, next) {
-        fn(req, res, next).catch((err) => next(err));
-    }
-};
+const { newUrl, asyncWrap } = require("../middleware.js");
+// function asyncWrap(fn) {
+//     return function (req, res, next) {
+//         fn(req, res, next).catch((err) => next(err));
+//     }
+// };
 router.get("/signup", (req, res) => {
 
     res.render("users/signup.ejs");
@@ -20,7 +20,7 @@ router.post("/signup",asyncWrap( async (req, res , next) => {
     req.login(saved, (err)=>{
         if(err){
             req.flash("error", "something went wrong!!");
-            next(err);
+            return next(err);
         }
         req.flash("success", "wellcome to JUNAID KHAN");
         res.redirect("/listings");
@@ -49,7 +49,7 @@ router.post("/login", newUrl,
         req.logout((err)=>{
             if(err){
                 req.flash("error", "something went wrong!!");
-                next(err);
+                return next(err);
             }
             
         });
