@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/schema.js");
+
 const {islogin, isOwner, validatordata, asyncWrap, isdata  } = require("../middleware.js");
+const Review = require("../models/reviewschema.js");
 
 router.get("/", async (req, res) => {
     const list = await User.find({});
@@ -41,7 +43,7 @@ isdata,
 //show route
 router.get("/:id",isdata, asyncWrap(async (req, res) => {
     let { id } = req.params;
-    const list = await User.findById(id).populate("reviews").populate("owner");
+    const list = await User.findById(id).populate({path: "reviews",populate: { path:"rOwner"}}).populate("owner");
     res.render("showlist.ejs", { list });
 }));
 //delete route

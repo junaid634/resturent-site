@@ -1,4 +1,5 @@
 const { serverschema, reviewschema } = require("./models/joischema");
+const Review = require("./models/reviewschema");
 const User = require("./models/schema");
 
 module.exports.asyncWrap = (fn) => {
@@ -42,6 +43,8 @@ module.exports.validatordata = async (req, res, next) => {
 }
 module.exports.validateReview = async (req, res, next) => {
     const data = req.body;
+    data.review.rOwner = req.user;
+    console.log(data);
     const result = reviewschema.validate(data);
     if (result.error) {
         req.flash("error", "Please make sure you entered valid review!!");
@@ -55,6 +58,17 @@ module.exports.isdata = async (req, res, next) => {
     if (!list) {//------------------- pop up alerts
         req.flash("error", "Listing is not exist!!");
         return res.redirect("/listings");
+    }
+    next();
+}
+module.exports.isrOwner = async (req, res, next) => {
+    let { id, reviewId } = req.params;
+    let review = await Review.findById(reviewId);
+    
+    if(!review.rOwner.equals(res.locals.currUser._id)){
+
+    req.flash("error", "You are not the Owner of this review!!");
+    return res.redirect(`/listings/${id}`);
     }
     next();
 }

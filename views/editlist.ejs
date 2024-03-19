@@ -1,59 +1,64 @@
+<body>
+    <div class="col-8 offset-2 mt-3">
+        <h1>You are Editing <%= editlist.title %>
+        </h1>
+        <form method="post" action="/listings/<%= editlist._id %>?_method=patch" class="needs-validation">
 
-<body>      
-        <div class="col-8 offset-2 mt-3">
-            <h1>You are Editing <%= editlist.title %></h1>
-                    <form method="post" action="/listings/<%= editlist._id %>?_method=patch" class="needs-validation">
-        
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control" value="<%=editlist.title %>  " name="title" placeholder="Enter title" required>
-                        <div class="valid-feedback">Good!</div>
-                        <div class="invalid-feedback">Invalid data</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea type="text" class="form-control"  name="description"
-                        placeholder="Enter description" required><%= editlist.description %></textarea>
-                        <div class="valid-feedback">Good!</div>
-                        <div class="invalid-feedback">invalid Description</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="image" class="form-label">Image Link/Url</label>
-        
-                        <input type="text" name="image" value="<%= editlist.image %>" class="form-control" placeholder="Enter image url/link">
-                        <div class="valid-feedback">Good!</div>
-                    </div>
-                    <div class="row">
-                        <div class="mb-3 col-md-4">
-                            <label for="number" class="form-label">Number</label>
-        
-                            <input type="number" class="form-control" value="<%= editlist.price %>" name="price" placeholder="Enter price" required>
-                            <div class="valid-feedback">Good!</div>
-                            <div class="invalid-feedback">Enter valid number</div>
-                        </div>
-                        <div class="mb-3 col-md-8">
-                            <label for="location" class="form-label">Location</label>
-        
-                            <input required type="text" name="location" value="<%= editlist.location %>" class="form-control" placeholder="Enter location">
-                            <div class="valid-feedback">Good!</div>
-                            <div class="invalid-feedback">Enter valid location</div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="country" class="form-label">Country</label>
-        
-                        <input type="text" required class="form-control" value="<%= editlist.country %>" name="country" placeholder="Enter country">
-                        <div class="valid-feedback">Good!</div>
-                        <div class="invalid-feedback">valid country required</div>
-                    </div>
-        
-                    <br><br>
-                    <button class="btn btn-info">Update</button>
-                    <br><br>
-        
-                </form>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" value="<%=editlist.title %>  " name="title"
+                    placeholder="Enter title" required>
+                <div class="valid-feedback">Good!</div>
+                <div class="invalid-feedback">Invalid data</div>
             </div>
-            
-   
-    </body>
-    <% layout('/layouts/base') %>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea type="text" class="form-control" name="description" placeholder="Enter description"
+                    required><%= editlist.description %></textarea>
+                <div class="valid-feedback">Good!</div>
+                <div class="invalid-feedback">invalid Description</div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image Link/Url</label>
+
+                <input type="text" name="image" value="<%= editlist.image %>" class="form-control"
+                    placeholder="Enter image url/link">
+                <div class="valid-feedback">Good!</div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="number" class="form-label">Number</label>
+
+                    <input type="number" class="form-control" value="<%= editlist.price %>" name="price"
+                        placeholder="Enter price" required>
+                    <div class="valid-feedback">Good!</div>
+                    <div class="invalid-feedback">Enter valid number</div>
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label for="location" class="form-label">Location</label>
+
+                    <input required type="text" name="location" value="<%= editlist.location %>" class="form-control"
+                        placeholder="Enter location">
+                    <div class="valid-feedback">Good!</div>
+                    <div class="invalid-feedback">Enter valid location</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+
+                <input type="text" required class="form-control" value="<%= editlist.country %>" name="country"
+                    placeholder="Enter country">
+                <div class="valid-feedback">Good!</div>
+                <div class="invalid-feedback">valid country required</div>
+            </div>
+
+            <br><br>
+            <button class="btn btn-info">Update</button>
+            <br><br>
+
+        </form>
+    </div>
+
+
+</body>
+<% layout('/layouts/base') %>
