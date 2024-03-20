@@ -40,9 +40,20 @@
             <h4>Add Review</h4>
             <form action="/listings/<%= list._id %>/reviews" method="post" class="needs-validation">
                 <label for="rat" class="form-label mb-3 mt-3">Rating</label>
-                <br>
-                <input type="range" class="form-range" max="5" min="1" name="review[rat]">
-                <br>
+                <fieldset class="starability-slot">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rat]" value="0" checked
+                        aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rat]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rat]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rat]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rat]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rat]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
                 <div>
                     <label for="comment" class="form-label mb-3 mt-3">Comment</label>
                     <br>
@@ -67,12 +78,12 @@
                                 <h5 class="card-title">
                                     <%= rev.rOwner.username %>
                                 </h5>
+                                <p class="starability-result" data-rating="<%= rev.rat %>">
+
+                                </p>
                                 <h6 class="card-subtitle mb-2 text-body-secondary">
                                     <%= rev.content %>
                                 </h6>
-                                <p class="card-text"> <b>Rating: </b>
-                                    <%= rev.rat %> Stars
-                                </p>
                             </div>
                             <% if(currUser && currUser._id.equals(rev.rOwner._id)){ %>
                                 <form class="mb-3" method="post"

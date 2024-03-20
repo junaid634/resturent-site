@@ -119,6 +119,6 @@ app.use((err, req, res, next) => {
     if (status || message) {
         req.flash("error", `${status} error ->> ${message}`);
         res.status(status).redirect("/listings");
-        next();
     }
+    next();
 })
