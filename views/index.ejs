@@ -1,40 +1,39 @@
-
 <body>
 
-        <h3>Listings</h3>
-        <!-- <form action="/listings/new" method="get">
+    <h3>Listings</h3>
+    <!-- <form action="/listings/new" method="get">
         <button>Create New List</button>
     </form> -->
-        <div class="row row-cols-xl-3 row-cols-xxl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 ">
-            <% for(let listing of list){ %>
-                <div class="card_container">
-                    <a href="listings/<%= listing._id %>">
-                        <div class="card card-id" style="width: 18rem;">
-                            <div class="card card-id text-bg-dark">
-                                <img src="<%= listing.image %>" class="card-img-top" alt="list image">
-                                <div class="card-img-overlay">
-                                    <div class="card-e">
-                                        <p>Junaid Khan</p>
-                                        <i class="fa-sharp fa-regular fa-heart"></i>
-                                    </div>
+    <div class="row row-cols-xl-3 row-cols-xxl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 ">
+        <% for(let listing of list){ %>
+            <div class="card_container">
+                <a href="listings/<%= listing._id %>">
+                    <div class="card card-id" style="width: 18rem;">
+                        <div class="card card-id text-bg-dark">
+                            <img src="<%= listing.image %>" class="card-img-top" alt="list image">
+                            <div class="card-img-overlay">
+                                <div class="card-e">
+                                    <p>Junaid Khan</p>
+                                    <i class="fa-sharp fa-regular fa-heart"></i>
                                 </div>
                             </div>
-                            <div class="card-body">
-                                <p class="card-text"><b>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"><b>
                                     <%= listing.title%>
                                 </b></p>
-                                <p class="card-text">
-                                    <%= listing.description%>
-                                </p>
-                                <p class="card-text">
-                                    PKR- <%= listing.price %>
-                                </p>
-                            </div>
+                            <p class="card-text">
+                                <%= listing.description%>
+                            </p>
+                            <p class="card-text">
+                                PKR- <%= listing.price %>
+                            </p>
                         </div>
-                    </a>
-                </div>
-                <% } %>
-        </div>
+                    </div>
+                </a>
+            </div>
+            <% } %>
+    </div>
 
-    </body>
-                        <% layout('/layouts/base') %>
+</body>
+<% layout('/layouts/base') %>
