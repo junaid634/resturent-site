@@ -3,7 +3,10 @@ body {
     display: flex !important;
     flex-direction: column !important;
 }
-
+#image{
+    height: 150px;
+    width: 200px;
+}
 .alert {
     display: flex;
     justify-content: space-between;
@@ -63,3 +66,84 @@ body {
 .card-img-overlay:hover {
     opacity: 1;
 }
+#map{
+    height: 500px;
+    width: 80vhpx;
+    border: 2px solid gray;
+
+}
+#filters{
+    display: flex;
+    align-items: center;
+}
+.filter{
+    margin-right: 2rem;
+    text-align: center;
+    opacity: 0.7;
+    hr{
+        opacity: 0;
+    }
+
+}
+.tax-switch{
+    border: 2px solid black;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.5rem;
+    padding: 1rem;
+    margin-left: 5rem;
+    
+}
+@media only screen and (max-width: 1200px) {
+.last2{
+    display: none;
+}
+}   @media only screen and (max-width: 1000px) {
+.last4{
+    display: none;
+}
+
+}
+
+@media only screen and (max-width: 768px) {
+/* Hide the entire container when the width is smaller */
+
+
+
+.tax-switch{
+width: 70%;
+margin: 0;
+offset: 20%;
+}
+.last4{ 
+display: none; 
+}
+}
+@media only screen and (max-width: 500px) {
+.last6{ 
+display: none; 
+}
+
+}
+
+.filter:hover{
+    opacity: 1;
+    hr{
+        display: block;
+        opacity: 1;
+        font-weight: 900;
+       
+    }
+}
+.filter p{
+    font-size: small;
+    font-weight: 500;
+    margin-bottom: 0px;
+} 
+.filter i{
+    font-size: 2rem;    
+}
+
+

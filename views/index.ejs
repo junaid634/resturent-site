@@ -1,16 +1,63 @@
 <body>
+    <div id="filters" class="nav nav-fill ">
+        <div class="filter">
+            <div class="icon"><i class="fa-solid fa-fire"></i></div>
+            <p>Trandings</p>
+            <hr>
+        </div>
+        <div class="filter">
+            <div class="icon"><i class="fa-solid fa-mountain-city"></i></div>
+            <p>Iconic Cities</p>
+            <hr>
+        </div>
+        <div class="filter last6">
+            <div class="icon"><i class="fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+            <hr>
+        </div>
+        <div class="filter last6">
+            <div class="icon"><i class="fa-solid fa-mountain-sun"></i></div>
+            <p>Mauntain</p>
+            <hr>
+        </div>
+        <div class="filter last4 last6">
+            <div class="icon"><i class="fa-solid fa-person-snowboarding"></i></div>
+            <p>Enjoyments</p>
+            <hr>
+        </div>
+        <div class="filter last4 last6">
+            <div class="icon"><i class="fa-solid fa-igloo"></i></div>
+            <p>Earth Houses</p>
+            <hr>
+        </div>
+        <div class="filter last4 last2 last6">
+            <div class="icon"><i class="fa-solid fa-person-swimming"></i></div>
+            <p>Swiming Pools</p>
+            <hr>
+        </div>
+        <div class="filter last4 last2 last6">
+            <div class="icon"><i class="fa-solid fa-network-wired"></i></div>
+            <p>Internet</p>
+            <hr>
+        </div>
+        <div class="tax-switch">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Show Taxes</label>
+            </div>
+        </div>
 
-    <h3>Listings</h3>
-    <!-- <form action="/listings/new" method="get">
-        <button>Create New List</button>
-    </form> -->
+
+    </div>
     <div class="row row-cols-xl-3 row-cols-xxl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4 ">
-        <% for(let listing of list){ %>
+        <% if(list.length == 0){ %>
+            <h1 style="color: red; text-align: center;">There is no resturent on this place or invalid place</h1>
+        <% } else { for(let listing of list){ %>
             <div class="card_container">
                 <a href="listings/<%= listing._id %>">
                     <div class="card card-id" style="width: 18rem;">
                         <div class="card card-id text-bg-dark">
-                            <img src="<%= listing.image %>" class="card-img-top" alt="list image">
+                            <img src="<%= listing.image.url %>" class="card-img-top" alt="list image">
                             <div class="card-img-overlay">
                                 <div class="card-e">
                                     <p>Junaid Khan</p>
@@ -27,12 +74,14 @@
                             </p>
                             <p class="card-text">
                                 PKR- <%= listing.price %>
+                                    &nbsp; &nbsp; <i class="tax" style="display: none;">+18% GST</i>
+                                    <!-- obove line javascript code is in javasccript.js file located in public folder -->
                             </p>
                         </div>
                     </div>
                 </a>
             </div>
-            <% } %>
+            <% } }%>
     </div>
 
 </body>

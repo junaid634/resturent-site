@@ -1,9 +1,14 @@
-<body>
+<% layout('/layouts/base') %>
+    <script>
+        const accessToken = "<%= process.env.map_api %>";
+        const cords = <%- JSON.stringify(list.geometry.coordinates) %>;
+        const title = "<%= list.title %>";
+    </script>
     <div class="row col-8 offset-2 mt-3">
 
         <h3>List Detailes</h3>
         <div class="card card-id" style="width: 40rem;">
-            <img src="<%= list.image %>" class="card-img-top" alt="list image">
+            <img src="<%= list.image.url %>" class="card-img-top" alt="list image">
             <div class="card-body">
                 <p class="card-text"><b>
                         <%= list.title%>
@@ -68,32 +73,33 @@
             </form>
             <hr>
             <% } %>
-                <h4>All Reviews</h4>
-                <div class=" row mt-3 mb-3">
+                <% if(list.reviews.length> 0){ %>
+                    <h4>All Reviews</h4>
+                    <div class=" row mt-3 mb-3">
+                        <% for(rev of list.reviews){ %>
+                            <div class="card col-5 ms-3 mt-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <%= rev.rOwner.username %>
+                                    </h5>
+                                    <p class="starability-result" data-rating="<%= rev.rat %>">
 
-
-                    <% for(rev of list.reviews){ %>
-                        <div class="card col-5 ms-3 mt-3">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <%= rev.rOwner.username %>
-                                </h5>
-                                <p class="starability-result" data-rating="<%= rev.rat %>">
-
-                                </p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">
-                                    <%= rev.content %>
-                                </h6>
+                                    </p>
+                                    <h6 class="card-subtitle mb-2 text-body-secondary">
+                                        <%= rev.content %>
+                                    </h6>
+                                </div>
+                                <% if(currUser && currUser._id.equals(rev.rOwner._id)){ %>
+                                    <form class="mb-3" method="post"
+                                        action="/listings/<%= list._id %>/reviews/<%= rev._id %>?_method=delete">
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                    <% } %>
                             </div>
-                            <% if(currUser && currUser._id.equals(rev.rOwner._id)){ %>
-                                <form class="mb-3" method="post"
-                                    action="/listings/<%= list._id %>/reviews/<%= rev._id %>?_method=delete">
-                                    <button class="btn btn-danger">Delete</button>
-                                </form>
-                                <% } %>
-                        </div>
-                        <% } %>
-                </div>
+                            <% } %>
+                    </div>
+                    <% } %>
+                        <h3>You'll be there!</h3>
+                        <div id="map"></div>
     </div>
-</body>
-<% layout('/layouts/base') %>
+    <script src="/map.js"></script>

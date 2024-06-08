@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 let app = express();
 const path = require("path");
@@ -5,9 +6,24 @@ const method = require("method-override");
 const mongoose = require("mongoose");
 const cookieparser = require("cookie-parser");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const localstratigy = require("passport-local");
+if(process.env.NODE_ENV != "production"){
+
+
+
+async(req,res,next)=>{
+    
+    res.locals.access = process.env.map_api;
+}
+}
+const db_link = "mongodb://127.0.0.1:27017/junaid"
+const database_url = process.env.DATABASE;
+
+
+
 
 
 // const User = require("./models/schema.js");///------    all are shifted in the routes folder to make it better
@@ -31,22 +47,33 @@ const ejsmate = require("ejs-mate");
 const { error } = require("console");
 app.engine("ejs", ejsmate);
 //                -----------             data base connection settings
-async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/junaid");
 
+
+
+async function main() {
+    await mongoose.connect(database_url);
 }
 
 main().then(() => {
     console.log("DB_connected");
 }).catch((err) => {
-    console.log(err);
+    console.log("the error is that : ",err);
 });
 
-//---------cookie sessions 
 
-app.use(cookieparser());
-app.use(session({
-    secret: "saqibkhan",
+
+//---------cookie sessions
+const stor = MongoStore.create({
+    mongoUrl:database_url,
+    crypto:
+    {
+        secret:process.env.SECRET1 
+    },
+    touchAfter: 24*3600,
+}); 
+const sessionOptions = {
+    store:stor,
+    secret: process.env.SECRET1,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -55,7 +82,10 @@ app.use(session({
         httpOnly: true
 
     },
-}));
+}
+
+app.use(cookieparser());
+app.use(session(sessionOptions));
 app.use(flash());
 
 
@@ -68,11 +98,6 @@ passport.deserializeUser(User1.deserializeUser());
 
 
 
-
-app.get("/", (req, res) => {
-    res.send("home page");
-});
-
 app.use((req, res, next) => { // error pop up msg or alerts
 
     res.locals.massage = req.flash("success");
@@ -80,6 +105,7 @@ app.use((req, res, next) => { // error pop up msg or alerts
     res.locals.currUser = req.user;
     next();
 });
+// console.log(res.locals.access);
 
 
 

@@ -1,7 +1,7 @@
 <body>
     <div class="col-8 offset-2 mt-3">
         <h1>Add New listing</h1>
-        <form action="/listings" method="post" class="needs-validation">
+        <form action="/listings" method="post" class="needs-validation" enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -11,29 +11,29 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea type="text" class="form-control" name="description" placeholder="Enter description"
+                <textarea type="text" class="form-control" name="description" placeholder="Description"
                     required></textarea>
                 <div class="valid-feedback">Good!</div>
                 <div class="invalid-feedback">Description should be valid!</div>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Image Link/Url</label>
+                <label for="image" class="form-label">Upload Image</label>
 
-                <input type="text" name="image" class="form-control" placeholder="Enter image url/link">
+                <input type="file" name="image" class="form-control" >
                 <div class="valid-feedback">Good!</div>
             </div>
             <div class="row">
                 <div class="mb-3 col-md-4">
                     <label for="number" class="form-label">Number</label>
 
-                    <input class="form-control" name="price" placeholder="Enter price" required>
+                    <input class="form-control" name="price" placeholder="1200" required>
                     <div class="valid-feedback">Good!</div>
                     <div class="invalid-feedback">invalid number!</div>
                 </div>
                 <div class="mb-3 col-md-8">
                     <label for="location" class="form-label">Location</label>
 
-                    <input type="text" name="location" class="form-control" placeholder="Enter location" required>
+                    <input type="text" name="location" class="form-control" placeholder="Multan, Pakistan" required>
                     <div class="valid-feedback">Good!</div>
                     <div class="invalid-feedback">invalid location!</div>
                 </div>
@@ -41,7 +41,7 @@
             <div class="mb-3">
                 <label for="country" class="form-label">Country</label>
 
-                <input type="text" class="form-control" name="country" placeholder="Enter country" required>
+                <input type="text" class="form-control" name="country" placeholder="Pakistan" required>
             </div>
 
             <br><br>

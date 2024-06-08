@@ -1,9 +1,5 @@
 const mongoose = require("mongoose");
 const Review = require("./reviewschema");
-async function main() {
-    await mongoose.connect("mongodb://127.0.0.1:27017/junaid");
-};
-main().then(() => { console.log("connected") });
 
 const userschema = mongoose.Schema({
     title: {
@@ -15,10 +11,8 @@ const userschema = mongoose.Schema({
         require: true
     },
     image: {
-        type: String,
-        default: "https://images.unsplash.com/photo-1682685797168-613fd0cae41d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        set: (v) => v === "" ? "https://images.unsplash.com/photo-1682685797168-613fd0cae41d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" : v
-
+        url: String,
+        filename: String,
     },
     price: {
         type: Number,
@@ -42,7 +36,18 @@ const userschema = mongoose.Schema({
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User1"
-    }
+    },
+    geometry:{ 
+        type: {
+          type: String, // Don't do `{ location: { type: String } }`
+          enum: ['Point'], // 'location.type' must be 'Point'
+      
+        },
+        coordinates: {
+          type: [Number],
+          
+        }
+    } 
 });
 userschema.post("findOneAndDelete", async (listing) => {
     if (listing) {

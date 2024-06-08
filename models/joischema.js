@@ -2,7 +2,10 @@ const joi = require("joi");
 module.exports.serverschema = joi.object({
     title: joi.string().required(),
     description: joi.string().required(),
-    image: joi.string().allow("", null),
+    image: {
+        url : joi.string(),
+        filename: joi.string(),
+    },
     price: joi.number().required(),
     location: joi.string().required(),
     country: joi.string().required(),
@@ -16,3 +19,4 @@ module.exports.reviewschema = joi.object({
         rOwner: joi.required(),
     }).required(),
 });
+// joi.string().allow("", null),
